@@ -116,12 +116,15 @@ public class AutenticacionService {
         return emitirTokens(usuario, ahora);
     }
 
+    //Método que busca la sesión mediante el hash del refresh token, si es que existe, se revoca con la fecha actual
     @Transactional
     public void cerrarSesion(String refreshToken) {
         sesiones.findByTokenHash(hashToken(refreshToken))
                 .ifPresent(s -> s.revocar(Instant.now()));
     }
 
+    //Método para generar un refresh token aleatoriamente,
+    // se guarda en la base de datos, genera un JWT, y devuelve ambos al cliente
     private TokensResponse emitirTokens(Usuario usuario, Instant ahora) {
         String refresh = generarTokenOpaco();
         sesiones.save(new SesionUsuario(usuario.getId(), hashToken(refresh), ahora.plus(duracionRefresh)));
@@ -129,9 +132,13 @@ public class AutenticacionService {
         return new TokensResponse(acceso, refresh, "Bearer", jwt.segundosAcceso());
     }
 
+    //Método par eliminar espacios al incio y final de texto (también los convierte a minúsculas)
     private static String normalizar(String valor) {
         return valor.trim().toLowerCase(Locale.ROOT);
     }
+
+    //Método para generar un token aleatorio de 32 bytes,
+    // se convierte a base65 y se usa como refresh token
 
     private static String generarTokenOpaco() {
         byte[] bytes = new byte[32];
@@ -139,7 +146,8 @@ public class AutenticacionService {
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 
-    // SHA-256 en hexadecimal: 64 caracteres, encaja en CHAR(64)
+    // SHA-256 en hexadecimal: devuelve su hash en exadecimal para almacenar y comparar el refresh token
+    // sin guardar el valor original
     static String hashToken(String token) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

@@ -12,6 +12,8 @@ import java.util.Map;
 @RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
 
+    //Método que define el endpoint REST tipo GET, tiene como función acceder al perfil del
+    // usuario, retorna id y rol
     @GetMapping("/yo")
     public Map<String, Object> yo(Authentication auth) {
         return Map.of(

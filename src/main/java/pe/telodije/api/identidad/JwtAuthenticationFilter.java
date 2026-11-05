@@ -25,6 +25,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.jwt = jwt;
     }
 
+
+    //Método para interceptar las solicitudes http, obtiene la cabecera del JWT, valida firma y expiración, extrae el usuario
+    // y rol, y registrar la autenticación en el SecurityCOntextHolder
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws ServletException, IOException {
