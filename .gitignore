@@ -1,0 +1,15 @@
+# Compilación
+target/
+*.log
+
+# Secretos
+.env
+*.env
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: telodije-api
+  datasource:
+    url: jdbc:postgresql://localhost:5433/telodije-db?stringtype=unspecified
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: false
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+jwt:
+  secreto: ${JWT_SECRETO}
+  expiracion-acceso-minutos: 15
+  expiracion-refresh-dias: 14
+
+seguridad:
+  intentos-maximos: 5
+  minutos-bloqueo: 15
