@@ -43,6 +43,8 @@ public interface AlojamientoRepository extends JpaRepository<Alojamiento, UUID> 
         LIMIT :limite
         """, nativeQuery = true)
 
+
+
     List<BusquedaProyeccion> buscarCercanos(
             @Param("lat") double lat,
             @Param("lng") double lng,
@@ -52,4 +54,13 @@ public interface AlojamientoRepository extends JpaRepository<Alojamiento, UUID> 
             @Param("tipoHabitacion") String tipoHabitacion,
             @Param("requiereCochera") boolean requiereCochera,
             @Param("limite") int limite);
+
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM alojamientos WHERE id = :id AND estado_publicacion = 'APROBADO')",
+            nativeQuery = true)
+    boolean estaAprobado(@Param("id") UUID id);
+
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM tipos_habitacion WHERE id = :tipoId AND alojamiento_id = :alojamientoId)",
+            nativeQuery = true)
+    boolean tipoPerteneceA(@Param("tipoId") UUID tipoId, @Param("alojamientoId") UUID alojamientoId);
+
 }

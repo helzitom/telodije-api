@@ -13,3 +13,7 @@ target/
 .classpath
 .project
 .settings/
+almacen/
+visita.json
+visita-mala.json
+INIT.txt
