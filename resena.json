@@ -1,0 +1,16 @@
+{
+    "comentario":  "Limpio, tranquilo y con buena señal de WiFi.",
+    "volveria":  true,
+    "calificacion":  5,
+    "servicios":  [
+                      {
+                          "estado":  "PRESENTE",
+                          "servicioId":  5
+                      },
+                      {
+                          "estado":  "AUSENTE",
+                          "servicioId":  3
+                      }
+                  ],
+    "visitaId":  "49768607-e081-4a3d-bcb3-098d9378fb31"
+}
