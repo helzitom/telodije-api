@@ -61,4 +61,5 @@ public class Visita {
     public short getHoras() { return horas; }
     public BigDecimal getMontoPagadoPen() { return montoPagadoPen; }
     public Instant getLlegadaEn() { return llegadaEn; }
+    public UUID getUsuarioId() { return usuarioId; }
 }
