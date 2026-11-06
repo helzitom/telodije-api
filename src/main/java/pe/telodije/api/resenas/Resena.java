@@ -42,6 +42,9 @@ public class Resena {
     @Column(name = "fecha_resena", insertable = false, updatable = false)
     private Instant fechaResena;
 
+    @PostLoad
+    void cargarFecha() { }
+
     protected Resena() { }
 
     public Resena(UUID visitaId, UUID usuarioId, UUID alojamientoId,

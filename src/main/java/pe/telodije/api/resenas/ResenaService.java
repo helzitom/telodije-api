@@ -74,4 +74,11 @@ public class ResenaService {
     private static String limpiar(String texto) {
         return texto == null || texto.isBlank() ? null : texto.trim();
     }
+
+    @Transactional(readOnly = true)
+    public List<ResenaPublicaProyeccion> listarPublicas(UUID alojamientoId, int pagina, int tamano) {
+        int limite = Math.min(Math.max(tamano, 1), 50);
+        int desplazamiento = Math.max(pagina, 0) * limite;
+        return resenas.listarPublicas(alojamientoId, limite, desplazamiento);
+    }
 }
