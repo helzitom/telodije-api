@@ -40,6 +40,10 @@ public class SecurityConfig {
                                 "/api/v1/alojamientos/cercanos",
                                 "/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/admin/**").hasAnyRole("ADMIN", "MODERADOR")
+                        .requestMatchers("/actuator/health", "/error",
+                                "/api/v1/alojamientos/cercanos",
+                                "/api/v1/alojamientos/*/resenas",
+                                "/api/v1/auth/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(jwt),
                         UsernamePasswordAuthenticationFilter.class);

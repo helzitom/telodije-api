@@ -25,4 +25,6 @@ public class ResenaController {
                                  Authentication auth) {
         return servicio.crear(UUID.fromString(auth.getName()), req);
     }
+
+
 }
