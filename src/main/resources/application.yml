@@ -30,3 +30,6 @@ jwt:
 seguridad:
   intentos-maximos: 5
   minutos-bloqueo: 15
+
+almacenamiento:
+  ruta-local: ${ALMACEN_RUTA:./almacen}
