@@ -12,4 +12,7 @@ public interface BusquedaProyeccion {
     int getTotalResenas();
     Double getDistanciaMetros();
     BigDecimal getPrecioDesde();
+    Double getLatitud();
+    Double getLongitud();
+
 }

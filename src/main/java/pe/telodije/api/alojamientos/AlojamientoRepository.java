@@ -13,15 +13,17 @@ import java.util.UUID;
 public interface AlojamientoRepository extends JpaRepository<Alojamiento, UUID> {
 
     @Query(value = """
-        SELECT a.id                     AS "id",
-               a.nombre                 AS "nombre",
-               a.tipo::text             AS "tipo",
-               a.tiene_cochera          AS "tieneCochera",
-               a.calificacion_promedio  AS "calificacionPromedio",
-               a.total_resenas          AS "totalResenas",
+        SELECT a.id                          AS "id",
+               a.nombre                      AS "nombre",
+               a.tipo::text                  AS "tipo",
+               a.tiene_cochera               AS "tieneCochera",
+               a.calificacion_promedio       AS "calificacionPromedio",
+               a.total_resenas               AS "totalResenas",
+               ST_Y(a.ubicacion::geometry)   AS "latitud",
+               ST_X(a.ubicacion::geometry)   AS "longitud",
                ST_Distance(a.ubicacion,
                    ST_MakePoint(:lng, :lat)::geography) AS "distanciaMetros",
-               MIN(t.precio_pen)        AS "precioDesde"
+               MIN(t.precio_pen)             AS "precioDesde"
         FROM alojamientos a
         JOIN tipos_habitacion th ON th.alojamiento_id = a.id
         JOIN tarifas t           ON t.tipo_habitacion_id = th.id
@@ -42,9 +44,6 @@ public interface AlojamientoRepository extends JpaRepository<Alojamiento, UUID> 
         ORDER BY "distanciaMetros"
         LIMIT :limite
         """, nativeQuery = true)
-
-
-
     List<BusquedaProyeccion> buscarCercanos(
             @Param("lat") double lat,
             @Param("lng") double lng,
@@ -62,5 +61,4 @@ public interface AlojamientoRepository extends JpaRepository<Alojamiento, UUID> 
     @Query(value = "SELECT EXISTS (SELECT 1 FROM tipos_habitacion WHERE id = :tipoId AND alojamiento_id = :alojamientoId)",
             nativeQuery = true)
     boolean tipoPerteneceA(@Param("tipoId") UUID tipoId, @Param("alojamientoId") UUID alojamientoId);
-
 }
