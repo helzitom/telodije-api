@@ -44,7 +44,9 @@ public class SecurityConfig {
                                 "/api/v1/alojamientos/cercanos",
                                 "/api/v1/alojamientos/*/resenas",
                                 "/api/v1/auth/**",
-                                "/api/v1/alojamientos/*/detalle")
+                                "/api/v1/concurrencia",
+                                "/api/v1/alojamientos/*/detalle",
+                                "/api/v1/servicios")
                                 .permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(jwt),
