@@ -26,8 +26,20 @@ public class DetalleAlojamientoService {
         if (!alojamientos.estaAprobado(id)) {
             throw new ErrorNegocio(HttpStatus.NOT_FOUND, "Hospedaje no encontrado");
         }
+        DatosAlojamientoProyeccion datos = detalle.datos(id);
         List<TarifaProyeccion> tarifas = detalle.tarifasVigentes(id);
         List<ServicioProyeccion> servicios = detalle.servicios(id);
-        return Map.of("tarifas", tarifas, "servicios", servicios);
+
+        Map<String, Object> respuesta = new java.util.HashMap<>();
+        respuesta.put("id", id);
+        respuesta.put("nombre", datos.getNombre());
+        respuesta.put("tipo", datos.getTipo());
+        respuesta.put("direccion", datos.getDireccion());
+        respuesta.put("tieneCochera", datos.getTieneCochera());
+        respuesta.put("calificacionPromedio", datos.getCalificacionPromedio());
+        respuesta.put("totalResenas", datos.getTotalResenas());
+        respuesta.put("tarifas", tarifas);
+        respuesta.put("servicios", servicios);
+        return respuesta;
     }
 }

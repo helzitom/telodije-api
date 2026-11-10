@@ -37,4 +37,16 @@ public interface DetalleAlojamientoRepository extends JpaRepository<Alojamiento,
         ORDER BY s.id
         """, nativeQuery = true)
     List<ServicioProyeccion> servicios(@Param("alojamientoId") UUID alojamientoId);
+
+    @Query(value = """
+    SELECT a.nombre                 AS "nombre",
+           a.tipo::text             AS "tipo",
+           a.direccion              AS "direccion",
+           a.tiene_cochera          AS "tieneCochera",
+           a.calificacion_promedio  AS "calificacionPromedio",
+           a.total_resenas          AS "totalResenas"
+    FROM alojamientos a
+    WHERE a.id = :alojamientoId
+    """, nativeQuery = true)
+    DatosAlojamientoProyeccion datos(@Param("alojamientoId") UUID alojamientoId);
 }
