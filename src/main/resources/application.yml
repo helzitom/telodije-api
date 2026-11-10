@@ -33,3 +33,6 @@ seguridad:
 
 almacenamiento:
   ruta-local: ${ALMACEN_RUTA:./almacen}
+
+importacion:
+  overpass-url: https://overpass-api.de/api/interpreter

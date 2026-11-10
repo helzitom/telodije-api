@@ -23,7 +23,14 @@ public interface AlojamientoRepository extends JpaRepository<Alojamiento, UUID> 
                ST_X(a.ubicacion::geometry)   AS "longitud",
                ST_Distance(a.ubicacion,
                    ST_MakePoint(:lng, :lat)::geography) AS "distanciaMetros",
-               MIN(t.precio_pen)             AS "precioDesde"
+               MIN(t.precio_pen)             AS "precioDesde",
+               EXISTS (
+                   SELECT 1
+                   FROM tarifas t2
+                   JOIN tipos_habitacion th2 ON th2.id = t2.tipo_habitacion_id
+                   WHERE th2.alojamiento_id = a.id
+                     AND t2.vigente_hasta > now()
+               )                             AS "tienePrecios"
         FROM alojamientos a
         JOIN tipos_habitacion th ON th.alojamiento_id = a.id
         JOIN tarifas t           ON t.tipo_habitacion_id = th.id
