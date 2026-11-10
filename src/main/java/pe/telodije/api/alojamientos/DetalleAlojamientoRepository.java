@@ -44,7 +44,11 @@ public interface DetalleAlojamientoRepository extends JpaRepository<Alojamiento,
            a.direccion              AS "direccion",
            a.tiene_cochera          AS "tieneCochera",
            a.calificacion_promedio  AS "calificacionPromedio",
-           a.total_resenas          AS "totalResenas"
+           a.total_resenas          AS "totalResenas",
+           EXISTS (
+               SELECT 1 FROM verificaciones_dueno v
+               WHERE v.alojamiento_id = a.id AND v.estado = 'APROBADA'
+           )                        AS "verificado"
     FROM alojamientos a
     WHERE a.id = :alojamientoId
     """, nativeQuery = true)
