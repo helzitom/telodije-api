@@ -14,5 +14,5 @@ public interface BusquedaProyeccion {
     BigDecimal getPrecioDesde();
     Double getLatitud();
     Double getLongitud();
-
+    boolean getTienePrecios();
 }

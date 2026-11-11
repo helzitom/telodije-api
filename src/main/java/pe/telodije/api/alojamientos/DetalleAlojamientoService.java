@@ -38,6 +38,7 @@ public class DetalleAlojamientoService {
         respuesta.put("tieneCochera", datos.getTieneCochera());
         respuesta.put("calificacionPromedio", datos.getCalificacionPromedio());
         respuesta.put("totalResenas", datos.getTotalResenas());
+        respuesta.put("verificado", datos.getVerificado());
         respuesta.put("tarifas", tarifas);
         respuesta.put("servicios", servicios);
         return respuesta;

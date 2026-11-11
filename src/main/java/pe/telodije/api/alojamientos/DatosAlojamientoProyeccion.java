@@ -9,4 +9,5 @@ public interface DatosAlojamientoProyeccion {
     boolean getTieneCochera();
     BigDecimal getCalificacionPromedio();
     int getTotalResenas();
+    boolean getVerificado();
 }
