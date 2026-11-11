@@ -1,0 +1,5 @@
+target
+almacen
+.git
+*.json
+.env
