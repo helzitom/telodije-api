@@ -1,6 +1,7 @@
 package pe.telodije.api.multimedia;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import pe.telodije.api.identidad.ErrorNegocio;
@@ -25,6 +26,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+@Profile("!prod")
 @Component
 public class AlmacenFotosLocal implements AlmacenFotos {
 

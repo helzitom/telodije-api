@@ -38,6 +38,12 @@ seguridad:
 
 almacenamiento:
   ruta-local: ${ALMACEN_RUTA:./almacen}
+  s3:
+    endpoint: ${S3_ENDPOINT}
+    region: ${S3_REGION}
+    bucket: ${S3_BUCKET}
+    clave-id: ${S3_CLAVE_ID}
+    clave-secreta: ${S3_CLAVE_SECRETA}
 
 importacion:
   overpass-url: https://overpass-api.de/api/interpreter
